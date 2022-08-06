@@ -5,7 +5,9 @@ import { AppService } from './app.service';
 import validationSchema from './config/validationSchema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MenuModule } from './menu/menu.module';
-import { OrederModule } from './oreder/oreder.module';
+import { OrderController } from './order/order.controller';
+import { OrderService } from './order/order.service';
+import { OrderModule } from './order/order.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,9 +30,9 @@ import { OrederModule } from './oreder/oreder.module';
       }),
     }),
     MenuModule,
-    OrederModule,
+    OrderModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, OrderController],
+  providers: [AppService, OrderService],
 })
 export class AppModule {}
