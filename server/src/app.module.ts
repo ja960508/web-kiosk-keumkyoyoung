@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import validationSchema from './config/validationSchema';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MenuModule } from './menu/menu.module';
+import { OrderModule } from './order/order.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -13,6 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
+      inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.get('DATABASE_HOST'),
@@ -20,11 +23,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [],
+        entities: ['dist/**/*.entity.js'],
         synchronize: true,
       }),
-      inject: [ConfigService],
     }),
+    MenuModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
