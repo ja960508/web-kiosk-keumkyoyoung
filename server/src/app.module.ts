@@ -5,8 +5,6 @@ import { AppService } from './app.service';
 import validationSchema from './config/validationSchema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MenuModule } from './menu/menu.module';
-import { OrderController } from './order/order.controller';
-import { OrderService } from './order/order.service';
 import { OrderModule } from './order/order.module';
 @Module({
   imports: [
@@ -32,7 +30,7 @@ import { OrderModule } from './order/order.module';
     MenuModule,
     OrderModule,
   ],
-  controllers: [AppController, OrderController],
-  providers: [AppService, OrderService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
