@@ -17,4 +17,5 @@ export const Mockup = styled.div`
   border-width: calc(var(--unit) / 50);
   border-radius: calc(var(--unit) / (20));
   z-index: 100;
+  box-shadow: 0 0.5em 2em 0.2em rgba(0, 0, 0, 0.33), 0 0 0 0.5px #000 inset;
 `;
