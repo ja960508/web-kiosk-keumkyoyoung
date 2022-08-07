@@ -11,7 +11,7 @@ export class OrderItem {
   orderId: number;
 
   @Column({ type: 'int' })
-  productId: number;
+  menuItemId: number;
 
   @Column({ type: 'int' })
   count: number;
