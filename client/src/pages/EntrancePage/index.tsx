@@ -3,26 +3,27 @@ import styled from 'styled-components';
 import outImage from '../../assets/out.png';
 import inImage from '../../assets/in.png';
 import mixin from '../../styles/mixin';
+import Link from '../../lib/router/Link';
 
 const EntrancePage: FC = ({}) => {
   return (
     <Wrapper>
       <Title>우아한 카페</Title>
       <NavigationList>
-        <a>
+        <Link href="/menu">
           <NavigationItem>
             <img src={inImage} alt="매장 내 식사" />
             <p>먹고 가요</p>
             <NavigationDescription>진정한 식사는 매장에서</NavigationDescription>
           </NavigationItem>
-        </a>
-        <a>
+        </Link>
+        <Link href="/menu">
           <NavigationItem>
             <img src={outImage} alt="포장" />
             <p>포장 해요</p>
             <NavigationDescription>포장해도 맛집은 맛집</NavigationDescription>
           </NavigationItem>
-        </a>
+        </Link>
       </NavigationList>
     </Wrapper>
   );
