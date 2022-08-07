@@ -1,4 +1,5 @@
 import React from 'react';
+import EntrancePage from './pages/EntrancePage';
 import { FlexCenter, Mockup } from './styles/globalStyleComponent';
 import GlobalStyle from './styles/GlobalStyles';
 
@@ -7,7 +8,9 @@ function App() {
     <>
       <GlobalStyle />
       <FlexCenter>
-        <Mockup></Mockup>
+        <Mockup>
+          <EntrancePage />
+        </Mockup>
       </FlexCenter>
     </>
   );

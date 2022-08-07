@@ -14,6 +14,7 @@ const spaceVariable = css`
   --space-10: 64px;
   --space-11: 80px;
   --space-12: 96px;
+  --screen-width: 1100px;
 `;
 
 export default spaceVariable;

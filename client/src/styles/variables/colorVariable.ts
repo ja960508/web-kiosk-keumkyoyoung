@@ -51,6 +51,10 @@ const colorVariable = css`
   --orange500: #ff9800;
   --orange600: #fb8c00;
   --orange700: #f57c00;
+  --primary-1: #2ac1bc;
+  --primary-2: #a0e1e0;
+  --primary-3: #219a95;
+  --danger: #f45452;
 `;
 
 export default colorVariable;

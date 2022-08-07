@@ -10,12 +10,11 @@ export const FlexCenter = styled.div`
 `;
 
 export const Mockup = styled.div`
-  --unit: 1100px;
-  background-color: green;
-  height: calc(var(--unit) * 0.75);
-  width: var(--unit);
-  border-width: calc(var(--unit) / 50);
-  border-radius: calc(var(--unit) / (20));
+  background-color: black;
+  height: calc(var(--screen-width) * 0.75);
+  width: var(--screen-width);
+  border-width: calc(var(--screen-width) / 50);
+  border-radius: calc(var(--screen-width) / (20));
   z-index: 100;
   box-shadow: 0 0.5em 2em 0.2em rgba(0, 0, 0, 0.33), 0 0 0 0.5px #000 inset;
 `;
