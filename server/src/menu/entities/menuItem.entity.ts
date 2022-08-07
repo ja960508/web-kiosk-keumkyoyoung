@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Menu } from './menu.entity';
 
 export enum StatusFormat {
@@ -30,6 +30,6 @@ export class MenuItem {
   @Column({ nullable: false, type: 'enum', enum: StatusFormat, default: StatusFormat.NORMAL })
   status: StatusFormat;
 
-  @ManyToOne(() => Menu)
+  @ManyToOne((type) => Menu, (menu) => menu.menuItem)
   menu: Menu;
 }
