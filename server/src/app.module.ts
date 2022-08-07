@@ -25,6 +25,7 @@ import { OrderModule } from './order/order.module';
         database: configService.get('DATABASE_NAME'),
         entities: ['dist/**/*.entity.js'],
         synchronize: true,
+        timezone: 'Asia/Seoul',
       }),
     }),
     MenuModule,
