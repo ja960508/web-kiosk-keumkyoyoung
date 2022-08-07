@@ -1,9 +1,8 @@
 import React from 'react';
-import { Route, Routes } from './lib/router';
-import ClientRouter from './lib/router/Router';
+import { Route, Routes, ClientRouter } from './lib/router';
+import { FlexCenter, Mockup } from './styles/globalStyleComponent';
 import EntrancePage from './pages/EntrancePage';
 import MenuPage from './pages/MenuPage';
-import { FlexCenter, Mockup } from './styles/globalStyleComponent';
 import GlobalStyle from './styles/GlobalStyles';
 
 function App() {
