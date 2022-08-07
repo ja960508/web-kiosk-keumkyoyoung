@@ -2,6 +2,7 @@ import { Between, DataSource, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { Order } from '../entities/order.entity';
 import { CreateOrderDto } from '../dto/create-order.dto';
+import { getRangeByToday } from '../util/date';
 
 @Injectable()
 export class OrderRepository {
@@ -12,13 +13,7 @@ export class OrderRepository {
   }
 
   public async create(input: CreateOrderDto): Promise<Order> {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const day = currentDate.getDate();
-
-    const today = new Date(year, month, day);
-    const tomorrow = new Date(year, month, day + 1);
+    const [today, tomorrow] = getRangeByToday(1);
 
     const latestOrderNumber = await this.repository.count({
       where: { paymentDate: Between(today, tomorrow) },
