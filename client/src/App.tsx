@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import './App.css';
+import { FlexCenter, Mockup } from './styles/globalStyleComponent';
 import GlobalStyle from './styles/GlobalStyles';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div className="App"></div>
+      <FlexCenter>
+        <Mockup></Mockup>
+      </FlexCenter>
     </>
   );
 }

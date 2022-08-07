@@ -10,7 +10,13 @@ import {
 
 const GlobalStyle = createGlobalStyle`
 ${reset}
+html,body{
+  height:100%
+}
 
+#root{
+  height: 100%;
+}
 :root{
     ${colorVariable}
     ${shadowVariable}
