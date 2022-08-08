@@ -55,6 +55,8 @@ const colorVariable = css`
   --primary-2: #a0e1e0;
   --primary-3: #219a95;
   --danger: #f45452;
+
+  --body-text-color: var(--grey900);
 `;
 
 export default colorVariable;

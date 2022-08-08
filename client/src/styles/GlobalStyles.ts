@@ -36,7 +36,7 @@ ${reset}
 html,body{
   height:100%;
   font-family: var(--body-font);
-  color: var(--grey900);
+  color: var(--body-text-color);
 }
 `;
 
