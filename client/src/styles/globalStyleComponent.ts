@@ -11,7 +11,7 @@ export const FlexCenter = styled.div`
 
 export const Mockup = styled.div`
   background-color: black;
-  height: calc(var(--screen-width) * 0.75);
+  height: var(--screen-height);
   width: var(--screen-width);
   border-width: calc(var(--screen-width) / 50);
   border-radius: calc(var(--screen-width) / (20));
