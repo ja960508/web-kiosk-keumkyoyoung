@@ -11,8 +11,10 @@ const MenuPage: FC = ({}) => {
   return (
     <>
       <Wrapper>
-        <MenuHeader />
-        <MenuList />
+        <MenuWrapper>
+          <MenuHeader />
+          <MenuList />
+        </MenuWrapper>
         <Cart />
       </Wrapper>
     </>
@@ -27,6 +29,11 @@ const Wrapper = styled.section`
   height: 100%;
   background-color: white;
   position: relative;
-  ${mixin.flexMixin({ direction: 'column' })}
+  ${mixin.flexMixin({})}
   overflow-y: hidden;
+`;
+
+const MenuWrapper = styled.div`
+  ${mixin.flexMixin({ direction: 'column' })}
+  overflow-x: hidden;
 `;
