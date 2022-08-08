@@ -203,6 +203,7 @@ Remove the inheritance of text transform in Edge and Firefox.
   button,
   select {
     text-transform: none;
+    background-color: transparent; /* 2 */
   }
 
   /*
@@ -215,7 +216,6 @@ Remove the inheritance of text transform in Edge and Firefox.
   [type='reset'],
   [type='submit'] {
     -webkit-appearance: button; /* 1 */
-    background-color: transparent; /* 2 */
     background-image: none; /* 2 */
   }
 
