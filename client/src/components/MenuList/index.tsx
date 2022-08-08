@@ -6,18 +6,23 @@ import MenuItem from './MenuItem';
 // interface MenuListProps {}
 
 const MenuList: FC = ({}) => {
-  const arr = [1, 2, 3, 5, 5, 6, 6, 1, 3, 23, 2, 32, 3, 23, 23, 2, 32, 32, 3, 232, 3];
+  const arr = new Array(40).fill(0);
   return (
     <Wrapper>
-      {arr.map((a, index) => (
-        <MenuItem key={index} />
-      ))}
+      <MenuListWrapper>
+        {arr.map((a, index) => (
+          <MenuItem key={index} />
+        ))}
+      </MenuListWrapper>
     </Wrapper>
   );
 };
 
 export default MenuList;
 
-const Wrapper = styled.ul`
+const MenuListWrapper = styled.ul`
   ${mixin.flexMixin({ wrap: 'wrap' })}
+`;
+const Wrapper = styled.div`
+  overflow-y: hidden;
 `;
