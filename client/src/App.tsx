@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Route, Routes, ClientRouter } from './lib/router';
 import { FlexCenter, Mockup } from './styles/globalStyleComponent';
 import EntrancePage from './pages/EntrancePage';
 import MenuPage from './pages/MenuPage';
 import GlobalStyle from './styles/GlobalStyles';
+import { initAxios } from './api';
 
 function App() {
+  useLayoutEffect(() => {
+    initAxios();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
