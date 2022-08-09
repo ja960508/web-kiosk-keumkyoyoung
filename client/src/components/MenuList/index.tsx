@@ -22,7 +22,9 @@ export default MenuList;
 
 const MenuListWrapper = styled.ul`
   ${mixin.flexMixin({ wrap: 'wrap' })}
+  row-gap: var(--space-5);
 `;
+
 const Wrapper = styled.div`
   overflow-y: hidden;
 `;

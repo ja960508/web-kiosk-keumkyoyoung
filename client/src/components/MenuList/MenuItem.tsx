@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { RelativeContainer } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
 import StatusDescription from './StatusDescription';
 
@@ -8,13 +9,13 @@ function MenuItem() {
     <>
       <Wrapper>
         <MenuItemContainer>
-          <AbsoluteContainer>
+          <RelativeContainer>
             <img
               src="http://www.mmthcoffee.com/data/file/mm_new/thumb-1846184521_FvJity4O_379931970b3062dfc07284d9c27e7471b2e1aeae_216x216.png"
               alt="img"
             />
             <StatusDescription />
-          </AbsoluteContainer>
+          </RelativeContainer>
           <div>
             <MenuText>카페 모카 금교영</MenuText>
             <PriceText>2,000</PriceText>
@@ -38,18 +39,15 @@ const MenuItemContainer = styled.div`
   }
 
   img {
-    width: 160px;
+    width: 120px;
   }
 `;
 
 const MenuText = styled.p`
+  margin-top: var(--space-1);
   font-weight: 700;
 `;
 
 const PriceText = styled.p`
   font-weight: 500;
-`;
-
-const AbsoluteContainer = styled.div`
-  position: relative;
 `;
