@@ -56,7 +56,7 @@ const MenuBtn = styled(Button)<{ isActive?: boolean }>`
   border-radius: var(--rounded-lg);
 
   ${mixin.flexMixin({ justify: 'center', align: 'center' })}
-  ${({ isActive }) => isActive && '--bg-color: var(--primary-1); --text-color: white'};
+  ${({ isActive }) => isActive && '--bg-color: var(--selected); --text-color: white'};
   width: 100%;
 `;
 
