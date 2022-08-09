@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-const useQuery = async <TResponse, TError extends Error>(requestFunc: () => TResponse) => {
-  const [data, setData] = useState<TResponse>();
-  const [error, setError] = useState<TError>();
+const useQuery = <TResponse, TError extends Error>(requestFunc: () => TResponse) => {
+  const [data, setData] = useState<TResponse | null>(null);
+  const [error, setError] = useState<TError | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const query = async () => {
