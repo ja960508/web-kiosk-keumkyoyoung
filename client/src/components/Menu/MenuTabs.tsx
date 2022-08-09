@@ -1,44 +1,34 @@
 import React, { FC } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { useMenuAction, useMenuData } from '.';
 import { Button } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
 
-// interface MenuHeaderProps {
-//   name?: string;
-// }
+const MenuTabs: FC = ({}) => {
+  const { categories, selectedCategoryId } = useMenuData();
+  const action = useMenuAction();
 
-const MenuHeader: FC = ({}) => {
   return (
     <>
       <Wrapper>
         <MenuList>
-          <MenuBtnWrapper>
-            <MenuBtn isActive style={{}}>
-              커피
-            </MenuBtn>
-          </MenuBtnWrapper>
-          <MenuBtnWrapper>
-            <MenuBtn>커피</MenuBtn>
-          </MenuBtnWrapper>
-          <MenuBtnWrapper>
-            <MenuBtn>커피</MenuBtn>
-          </MenuBtnWrapper>
-          <MenuBtnWrapper>
-            <MenuBtn>커피</MenuBtn>
-          </MenuBtnWrapper>
-          <MenuBtnWrapper>
-            <MenuBtn>커피</MenuBtn>
-          </MenuBtnWrapper>
-          <MenuBtnWrapper>
-            <MenuBtn>커피</MenuBtn>
-          </MenuBtnWrapper>
+          {categories.map(({ id, name }) => (
+            <MenuBtnWrapper key={id}>
+              <MenuBtn
+                onClick={action.setSelectedCategoryID(id)}
+                isActive={id === selectedCategoryId}
+              >
+                {name}
+              </MenuBtn>
+            </MenuBtnWrapper>
+          ))}
         </MenuList>
       </Wrapper>
     </>
   );
 };
 
-export default MenuHeader;
+export default MenuTabs;
 
 const Wrapper = styled.nav`
   padding: var(--space-5) var(--space-5);

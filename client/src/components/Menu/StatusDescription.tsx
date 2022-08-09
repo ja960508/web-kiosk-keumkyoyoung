@@ -15,14 +15,14 @@ const statusColorMap: Record<StatusFormat, string> = {
 };
 
 interface StatusDescriptionProps {
-  status?: 'NORMAL' | 'HOT' | 'NEW';
+  status: 'NORMAL' | 'HOT' | 'NEW';
 }
 
-function StatusDescription({}: StatusDescriptionProps) {
+function StatusDescription({ status }: StatusDescriptionProps) {
   return (
     <>
       <Wrapper>
-        <StatusText status={StatusFormat['HOT']}>{'new'}</StatusText>
+        <StatusText status={StatusFormat[status]}>{status}</StatusText>
       </Wrapper>
     </>
   );

@@ -1,20 +1,24 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Cart from '../../components/Cart';
-import MenuHeader from '../../components/MenuHeader';
-import MenuList from '../../components/MenuList';
+import MenuGroup from '../../components/Menu';
+import MenuTabs from '../../components/Menu/MenuTabs';
+import MenuList from '../../components/Menu/MenuList';
 import mixin from '../../styles/mixin';
+import { Menu } from '../../types/server/menu';
 
-// interface MenuPageProps {}
+interface MenuPageProps {
+  menuItems: Menu[];
+}
 
-const MenuPage: FC = ({}) => {
+const MenuPage: FC<MenuPageProps> = ({ menuItems }) => {
   return (
     <>
       <Wrapper>
-        <MenuWrapper>
-          <MenuHeader />
+        <MenuGroup menuItems={menuItems}>
+          <MenuTabs />
           <MenuList />
-        </MenuWrapper>
+        </MenuGroup>
         <Cart />
       </Wrapper>
     </>
@@ -31,9 +35,4 @@ const Wrapper = styled.section`
   position: relative;
   ${mixin.flexMixin({})}
   overflow-y: hidden;
-`;
-
-const MenuWrapper = styled.div`
-  ${mixin.flexMixin({ direction: 'column' })}
-  overflow-x: hidden;
 `;

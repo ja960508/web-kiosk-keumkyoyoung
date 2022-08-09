@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-const useQuery = <TResponse, TError extends Error>(requestFunc: () => TResponse) => {
+const useQuery = <TResponse, TError extends Error>(requestFunc: () => Promise<TResponse>) => {
   const [data, setData] = useState<TResponse | null>(null);
   const [error, setError] = useState<TError | null>(null);
   const [isLoading, setIsLoading] = useState(true);

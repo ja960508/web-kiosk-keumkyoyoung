@@ -2,23 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { RelativeContainer } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
+import { MenuItem as IMenuItem } from '../../types/server/menu';
 import StatusDescription from './StatusDescription';
 
-function MenuItem() {
+interface MenuItemProps {
+  menuItemData: IMenuItem;
+}
+
+function MenuItem({ menuItemData }: MenuItemProps) {
+  const { status, thumbnail, name, price } = menuItemData;
   return (
     <>
       <Wrapper>
         <MenuItemContainer>
           <RelativeContainer>
-            <img
-              src="http://www.mmthcoffee.com/data/file/mm_new/thumb-1846184521_FvJity4O_379931970b3062dfc07284d9c27e7471b2e1aeae_216x216.png"
-              alt="img"
-            />
-            <StatusDescription />
+            <img src={thumbnail} alt={name} />
+            <StatusDescription status={status} />
           </RelativeContainer>
           <div>
-            <MenuText>카페 모카 금교영</MenuText>
-            <PriceText>2,000</PriceText>
+            <MenuText>{name}</MenuText>
+            <PriceText>{price.toLocaleString('kr')}</PriceText>
           </div>
         </MenuItemContainer>
       </Wrapper>
@@ -28,7 +31,7 @@ function MenuItem() {
 
 export default MenuItem;
 const Wrapper = styled.li`
-  width: 25%;
+  width: 80%;
 `;
 const MenuItemContainer = styled.div`
   background-color: white;
@@ -39,7 +42,7 @@ const MenuItemContainer = styled.div`
   }
 
   img {
-    width: 120px;
+    width: 100%;
   }
 `;
 
