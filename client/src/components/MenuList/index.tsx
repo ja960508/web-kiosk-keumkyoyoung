@@ -21,8 +21,9 @@ const MenuList: FC = ({}) => {
 export default MenuList;
 
 const MenuListWrapper = styled.ul`
-  ${mixin.flexMixin({ wrap: 'wrap' })}
+  ${mixin.flexMixin({ wrap: 'wrap', justify: 'space-around' })}
   row-gap: var(--space-5);
+  column-gap: var(--space-6);
 `;
 
 const Wrapper = styled.div`

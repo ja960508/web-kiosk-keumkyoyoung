@@ -28,7 +28,7 @@ function MenuItem() {
 
 export default MenuItem;
 const Wrapper = styled.li`
-  width: 25%;
+  width: 30%;
 `;
 const MenuItemContainer = styled.div`
   background-color: white;
@@ -39,7 +39,7 @@ const MenuItemContainer = styled.div`
   }
 
   img {
-    width: 120px;
+    width: 100%;
   }
 `;
 
