@@ -16,10 +16,13 @@ const CartMenuList = () => {
 
 const Wrapper = styled.ul`
   ${mixin.flexMixin({ direction: 'column', align: 'center' })}
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  margin-top: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--grey200);
+  border-bottom: 1px solid var(--grey200);
   height: calc(var(--screen-height) * 0.6);
   overflow-y: hidden;
+  row-gap: var(--space-4);
 `;
 
 export default CartMenuList;
