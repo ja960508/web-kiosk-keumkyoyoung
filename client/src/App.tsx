@@ -4,12 +4,15 @@ import { FlexCenter, Mockup } from './styles/globalStyleComponent';
 import EntrancePage from './pages/EntrancePage';
 import MenuPage from './pages/MenuPage';
 import GlobalStyle from './styles/GlobalStyles';
-import { initAxios } from './api';
+import { getMenu, initAxios } from './api';
+import useQuery from './hooks/usequery';
 
 function App() {
   useLayoutEffect(() => {
     initAxios();
   }, []);
+
+  const { data } = useQuery(getMenu);
 
   return (
     <>
@@ -21,9 +24,7 @@ function App() {
               <Route path="/">
                 <EntrancePage />
               </Route>
-              <Route path="/menu">
-                <MenuPage />
-              </Route>
+              <Route path="/menu">{data && <MenuPage menuItems={data} />}</Route>
             </Routes>
           </ClientRouter>
         </Mockup>
