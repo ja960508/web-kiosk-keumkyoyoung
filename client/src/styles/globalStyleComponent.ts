@@ -32,3 +32,7 @@ export const Button = styled.button`
 
   cursor: pointer;
 `;
+
+export const RelativeContainer = styled.div`
+  position: relative;
+`;
