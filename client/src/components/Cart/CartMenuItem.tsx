@@ -1,8 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 import mixin from '../../styles/mixin';
-import React from 'react';
-import { RelativeContainer } from '../../styles/globalStyleComponent';
-import { XIcon } from '../common/icons';
+import { Button, RelativeContainer } from '../../styles/globalStyleComponent';
+import { MinusIcon, PlusIcon, XIcon } from '../common/icons';
 
 function CartMenuItem() {
   return (
@@ -23,6 +23,15 @@ function CartMenuItem() {
             <MenuOption>tall, 얼음 많이</MenuOption>
             <MenuPrice>2000</MenuPrice>
           </MenuDescription>
+          <CounterWrapper>
+            <CounterIconButton>
+              <MinusIcon />
+            </CounterIconButton>
+            <Count>1</Count>
+            <CounterIconButton>
+              <PlusIcon />
+            </CounterIconButton>
+          </CounterWrapper>
         </Wrapper>
       </li>
     </>
@@ -62,6 +71,7 @@ const MenuDescription = styled.div`
 const MenuPrice = styled.p`
   color: var(--grey600);
   font-size: var(--text-sm);
+  margin-top: var(--space-1);
 `;
 const MenuName = styled.p`
   font-weight: 700;
@@ -88,4 +98,18 @@ const SVGWrapper = styled.div`
 
 const MenuOption = styled.div`
   font-size: 8px;
+`;
+const CounterWrapper = styled.div`
+  ${mixin.flexMixin({ align: 'center' })}
+  gap: var(--space-2);
+`;
+
+const CounterIconButton = styled(Button)`
+  --px: var(--space-1);
+  --py: var(--space-1);
+  width: 16px;
+`;
+
+const Count = styled.span`
+  font-size: var(--text-xs);
 `;
