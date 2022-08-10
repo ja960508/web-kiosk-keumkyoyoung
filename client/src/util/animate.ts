@@ -11,7 +11,6 @@ export const getSharedAnimationKeyFrame = <T extends HTMLElement, F extends HTML
   if (!(sharedElement && animatedElement)) {
     return [{}];
   }
-  console.log({ modal: animatedElement, container: sharedElement });
   const containerCoordinate = sharedElement.getBoundingClientRect();
   const modalCoordinate = animatedElement.getBoundingClientRect();
 
