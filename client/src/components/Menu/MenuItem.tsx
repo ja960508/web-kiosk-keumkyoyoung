@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { AnimatePresence } from '../../lib/animation/AnimatedPresence';
 import { RelativeContainer } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
 import { MenuItem as IMenuItem } from '../../types/server/menu';
+import MenuModal from '../Modal/MenuModal/MenuModal';
+import useModal from '../Modal/useModal';
 import StatusDescription from './StatusDescription';
 
 interface MenuItemProps {
@@ -11,10 +14,13 @@ interface MenuItemProps {
 
 function MenuItem({ menuItemData }: MenuItemProps) {
   const { status, thumbnail, name, price } = menuItemData;
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { isModalOpen, toggleModal } = useModal();
   return (
     <>
       <Wrapper>
-        <MenuItemContainer>
+        <MenuItemContainer ref={ref} onClick={toggleModal}>
           <RelativeContainer>
             <img draggable="false" src={thumbnail} alt={name} />
             <StatusDescription status={status} />
@@ -25,6 +31,11 @@ function MenuItem({ menuItemData }: MenuItemProps) {
           </div>
         </MenuItemContainer>
       </Wrapper>
+      <AnimatePresence>
+        {isModalOpen && (
+          <MenuModal sharedRef={ref} menuItemData={menuItemData} toggleModal={toggleModal} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
@@ -34,6 +45,7 @@ const Wrapper = styled.li`
   width: 80%;
 `;
 const MenuItemContainer = styled.div`
+  cursor: pointer;
   background-color: white;
   flex-basis: 1/4;
   border-radius: 16px;
