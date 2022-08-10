@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { RelativeContainer } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
 import { MenuItem as IMenuItem } from '../../types/server/menu';
+import Modal from '../Modal';
 import StatusDescription from './StatusDescription';
 
 interface MenuItemProps {
@@ -11,10 +12,11 @@ interface MenuItemProps {
 
 function MenuItem({ menuItemData }: MenuItemProps) {
   const { status, thumbnail, name, price } = menuItemData;
+  const ref = useRef<HTMLDivElement>(null);
   return (
     <>
       <Wrapper>
-        <MenuItemContainer>
+        <MenuItemContainer ref={null}>
           <RelativeContainer>
             <img draggable="false" src={thumbnail} alt={name} />
             <StatusDescription status={status} />
@@ -25,6 +27,7 @@ function MenuItem({ menuItemData }: MenuItemProps) {
           </div>
         </MenuItemContainer>
       </Wrapper>
+      <Modal />
     </>
   );
 }
@@ -34,6 +37,7 @@ const Wrapper = styled.li`
   width: 80%;
 `;
 const MenuItemContainer = styled.div`
+  cursor: pointer;
   background-color: white;
   flex-basis: 1/4;
   border-radius: 16px;

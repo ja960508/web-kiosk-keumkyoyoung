@@ -37,7 +37,12 @@ html,body{
   height:100%;
   font-family: var(--body-font);
   color: var(--body-text-color);
- 
+}
+#modal-root{
+  width:100%;
+  height: 100vh;
+  position: absolute;
+  top:0;
 }
 
 body {
