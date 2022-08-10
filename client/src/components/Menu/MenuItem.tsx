@@ -16,7 +16,7 @@ function MenuItem({ menuItemData }: MenuItemProps) {
       <Wrapper>
         <MenuItemContainer>
           <RelativeContainer>
-            <img src={thumbnail} alt={name} />
+            <img draggable="false" src={thumbnail} alt={name} />
             <StatusDescription status={status} />
           </RelativeContainer>
           <div>
