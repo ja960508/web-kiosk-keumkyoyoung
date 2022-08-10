@@ -10,7 +10,7 @@ interface AnimatedComponentProps<T extends HTMLElement>
   extends React.DetailedHTMLProps<React.HTMLAttributes<T>, T> {
   onExit?: AnimatedKeyFrame[];
   onEnter?: AnimatedKeyFrame[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isVisible?: boolean;
   animatedRef?: React.RefObject<T>;
   keyframeOption?: KeyframeAnimationOptions | undefined;
