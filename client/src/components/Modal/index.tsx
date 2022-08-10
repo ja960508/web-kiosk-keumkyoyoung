@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import AnimatedComponent from '../../lib/animation/animationComponent';
 
 interface ModalProps {
   toggleModal?: () => void;
@@ -16,7 +17,11 @@ const Modal: FC<ModalProps> = ({ toggleModal, children }) => {
 
   return ReactDOM.createPortal(
     <>
-      <ModalWrapper onClick={toggleModal}></ModalWrapper>
+      <ModalWrapper
+        onEnter={[{}, { backgroundColor: 'rgba(0,0,0,0.3)' }]}
+        keyframeOption={{ duration: 300 }}
+        onClick={toggleModal}
+      ></ModalWrapper>
       {children}
     </>,
     modalRoot
@@ -25,11 +30,13 @@ const Modal: FC<ModalProps> = ({ toggleModal, children }) => {
 
 export default Modal;
 
-const ModalWrapper = styled.div`
+const animatedDiv = AnimatedComponent('div');
+
+const ModalWrapper = styled(animatedDiv)`
   width: var(--screen-width);
   height: var(--screen-height);
-  background-color: black;
-  opacity: 0.3;
+
+  backdrop-filter: blur(1px);
   border-radius: calc(var(--screen-width) / (20));
   position: relative;
   color: white;
