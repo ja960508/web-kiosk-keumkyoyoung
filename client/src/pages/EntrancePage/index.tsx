@@ -4,6 +4,7 @@ import outImage from '../../assets/out.png';
 import inImage from '../../assets/in.png';
 import mixin from '../../styles/mixin';
 import Link from '../../lib/router/Link';
+import AnimatedComponent from '../../lib/animation/animationComponent';
 
 const EntrancePage: FC = ({}) => {
   return (
@@ -12,14 +13,14 @@ const EntrancePage: FC = ({}) => {
       <NavigationList>
         <Link href="/menu">
           <NavigationItem>
-            <img src={inImage} alt="매장 내 식사" />
+            <img draggable="false" src={inImage} alt="매장 내 식사" />
             <p>먹고 가요</p>
             <NavigationDescription>진정한 식사는 매장에서</NavigationDescription>
           </NavigationItem>
         </Link>
         <Link href="/menu">
           <NavigationItem>
-            <img src={outImage} alt="포장" />
+            <img draggable="false" src={outImage} alt="포장" />
             <p>포장 해요</p>
             <NavigationDescription>포장해도 맛집은 맛집</NavigationDescription>
           </NavigationItem>
@@ -31,13 +32,17 @@ const EntrancePage: FC = ({}) => {
 
 export default EntrancePage;
 
-const Wrapper = styled.section`
+const AnimatedSection = AnimatedComponent('section');
+
+const Wrapper = styled(AnimatedSection)`
   ${mixin.flexMixin({ direction: 'column', align: 'center', justify: 'center' })}
   background-color: var(--primary-1);
   border-radius: calc(var(--screen-width) / (30));
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 const Title = styled.h1`

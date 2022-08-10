@@ -37,6 +37,14 @@ html,body{
   height:100%;
   font-family: var(--body-font);
   color: var(--body-text-color);
+ 
+}
+
+body {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 `;
 

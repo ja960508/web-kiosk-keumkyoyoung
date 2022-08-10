@@ -3,11 +3,10 @@ import { useRouter } from './Router';
 
 interface RoutesProps {
   children?: React.ReactNode;
+  path: string;
 }
 
-export default function Routes({ children }: RoutesProps) {
-  const { path } = useRouter();
-
+export default function Routes({ children, path }: RoutesProps) {
   const matches: React.ReactElement[] = [];
 
   React.Children.forEach(children, (child) => {
@@ -20,7 +19,7 @@ export default function Routes({ children }: RoutesProps) {
   });
 
   if (matches.length === 0) {
-    window.location.replace('/404');
+    window.history.pushState(null, '', '/404');
   }
 
   return <>{matches}</>;

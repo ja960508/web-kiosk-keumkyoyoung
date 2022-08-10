@@ -14,8 +14,10 @@ export const Mockup = styled.div`
   height: var(--screen-height);
   width: var(--screen-width);
   border-width: calc(var(--screen-width) / 50);
+  overflow-x: hidden;
   border-radius: calc(var(--screen-width) / (20));
   z-index: 100;
+  position: relative;
   box-shadow: 0 0.5em 2em 0.2em rgba(0, 0, 0, 0.33), 0 0 0 0.5px #000 inset;
 `;
 
