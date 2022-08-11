@@ -16,6 +16,8 @@ interface Actions {
   deleteAll: () => void;
   countUp: (optionHash: CartItem['optionHash']) => () => void;
   countDown: (optionHash: CartItem['optionHash']) => () => void;
+  getTotalPrice: () => number;
+  getNumberOfProduct: () => number;
 }
 
 interface CartContext {
@@ -64,7 +66,14 @@ export function CartProvider({ children }: CartProviderProps) {
         const newCart = cart.filter((cartItem) => cartItem.optionHash !== optionHash);
         setCart(newCart);
       },
-
+      getTotalPrice: () => {
+        const totalPrice = cart.reduce((total, { count, price }) => total + price * count, 0);
+        return totalPrice;
+      },
+      getNumberOfProduct: () => {
+        const quantity = cart.reduce((length, { count }) => length + count, 0);
+        return quantity;
+      },
       countUp: (optionHash: CartItem['optionHash']) => () => {
         const id = cart.findIndex((cartItem) => cartItem.optionHash === optionHash);
         const newCart = [...cart];

@@ -8,6 +8,7 @@ import mixin from '../../styles/mixin';
 import { Menu } from '../../types/server/menu';
 import AnimatedComponent from '../../lib/animation/animationComponent';
 import { CartProvider } from '../../contexts/cartContext';
+import { ModalProvider } from '../../components/Modal/useChainingModal';
 
 interface MenuPageProps {
   menuItems: Menu[];
@@ -24,7 +25,9 @@ const MenuPage: FC<MenuPageProps> = ({ menuItems }) => {
           <MenuTabs />
           <MenuList />
         </MenuGroup>
-        <Cart />
+        <ModalProvider>
+          <Cart />
+        </ModalProvider>
       </AnimatedWrapper>
     </CartProvider>
   );
