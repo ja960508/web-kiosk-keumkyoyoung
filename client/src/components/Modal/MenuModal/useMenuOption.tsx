@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MenuItemOption } from '../../../types/server/menu';
-const MAX_COUNT = 20;
+
+export const MAX_COUNT = 20;
 
 const useMenuOption = (option: MenuItemOption) => {
   const [count, setCount] = useState(1);
+  const [isAllValidate, setIsAllValidate] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<(null | string | number | boolean)[]>(
     option.data.map(() => null)
   );
+
+  useEffect(() => {
+    if (actions.validateOption()) {
+      setIsAllValidate(true);
+    }
+  }, [selectedOptions]);
 
   const actions = {
     countUp: () => {
@@ -30,7 +38,7 @@ const useMenuOption = (option: MenuItemOption) => {
     },
   };
 
-  return { count, actions, selectedOptions };
+  return { count, actions, selectedOptions, isAllValidate };
 };
 
 export default useMenuOption;

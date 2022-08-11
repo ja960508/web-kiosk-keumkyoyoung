@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import Modal from '..';
+import { CartItem, useCart } from '../../../contexts/cartContext';
 import AnimatedComponent from '../../../lib/animation/animationComponent';
 import { Button } from '../../../styles/globalStyleComponent';
 import mixin from '../../../styles/mixin';
@@ -15,8 +16,27 @@ interface MenuModalProps {
 }
 
 function MenuModal({ toggleModal, menuItemData, sharedRef }: MenuModalProps) {
-  const { thumbnail, name, price, option } = menuItemData;
-  const { count, actions, selectedOptions } = useMenuOption(option);
+  const { thumbnail, name, price, option, id } = menuItemData;
+  const { count, actions, selectedOptions, isAllValidate } = useMenuOption(option);
+  const { cartActions } = useCart();
+
+  const addCart = () => {
+    if (!actions.validateOption()) {
+      return;
+    }
+
+    const optionHash = [name, ...selectedOptions].join('');
+
+    cartActions.add({
+      count,
+      optionHash,
+      menuId: id,
+      price,
+      name,
+      thumbnail,
+      option: selectedOptions as CartItem['option'],
+    });
+  };
 
   return (
     <Modal toggleModal={toggleModal}>
@@ -64,7 +84,15 @@ function MenuModal({ toggleModal, menuItemData, sharedRef }: MenuModalProps) {
             </ProductWrapper>
             <BtnList>
               <CancelBtn onClick={toggleModal}>이전</CancelBtn>
-              <ConfirmBtn>담기</ConfirmBtn>
+              <ConfirmBtn
+                isActive={isAllValidate}
+                onClick={() => {
+                  addCart();
+                  toggleModal();
+                }}
+              >
+                담기
+              </ConfirmBtn>
             </BtnList>
           </MenuModalWrapper>
         </LeftWrapper>
@@ -127,12 +155,13 @@ const ModalBtn = styled(Button)`
 const CancelBtn = styled(ModalBtn)`
   --bg-color: var(--selected);
 `;
-const ConfirmBtn = styled(ModalBtn)`
-  --bg-color: var(--primary-1);
+const ConfirmBtn = styled(ModalBtn)<{ isActive: boolean }>`
+  --bg-color: var(--grey300);
+  ${({ isActive }) => isActive && '--bg-color: var(--primary-1)'};
 `;
 const ProductWrapper = styled.div`
   display: flex;
-  gpa: var(--space-6);
+  gap: var(--space-6);
 `;
 
 const ProductInfo = styled.div`
@@ -192,10 +221,6 @@ const Name = styled.p`
   font-size: var(--text-lg);
   font-weight: 700;
 `;
-const Price = styled.p``;
 const Count = styled.span`
   font-size: var(--text-md);
 `;
-function setState(arg0: number): [any, any] {
-  throw new Error('Function not implemented.');
-}
