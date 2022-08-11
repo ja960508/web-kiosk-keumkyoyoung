@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useCart } from '../../contexts/cartContext';
 import mixin from '../../styles/mixin';
 import CartMenuItem from './CartMenuItem';
 
 const CartMenuList = () => {
-  const arr = new Array(20).fill(0);
+  const { cart } = useCart();
   return (
     <Wrapper>
-      {arr.map((r, index) => (
-        <CartMenuItem key={index} />
+      {cart.map((cartItem, index) => (
+        <CartMenuItem key={cartItem['optionHash']} cartItem={cartItem} />
       ))}
     </Wrapper>
   );

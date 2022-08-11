@@ -3,33 +3,37 @@ import styled from 'styled-components';
 import mixin from '../../styles/mixin';
 import { Button, RelativeContainer } from '../../styles/globalStyleComponent';
 import { MinusIcon, PlusIcon, XIcon } from '../common/icons';
+import { CartItem, useCart } from '../../contexts/cartContext';
 
-function CartMenuItem() {
+interface CartMenuItemProps {
+  cartItem: CartItem;
+}
+
+function CartMenuItem({ cartItem }: CartMenuItemProps) {
+  const { optionHash, option, price, count, name, thumbnail } = cartItem;
+  const { cartActions } = useCart();
+
   return (
     <>
       <li>
         <Wrapper>
           <RelativeContainer>
-            <img
-              draggable="false"
-              src="http://www.mmthcoffee.com/data/file/mm_new/thumb-1846184521_FvJity4O_379931970b3062dfc07284d9c27e7471b2e1aeae_216x216.png"
-              alt="img"
-            />
+            <img draggable="false" src={thumbnail} alt={name} />
             <SVGWrapper>
               <XIcon />
             </SVGWrapper>
           </RelativeContainer>
           <MenuDescription>
-            <MenuName>아메리카노</MenuName>
-            <MenuOption>tall, 얼음 많이</MenuOption>
-            <MenuPrice>2000</MenuPrice>
+            <MenuName>{name}</MenuName>
+            <MenuOption>{option.join(', ')}</MenuOption>
+            <MenuPrice>{(price * count).toLocaleString('kr')}원</MenuPrice>
           </MenuDescription>
           <CounterWrapper>
-            <CounterIconButton>
+            <CounterIconButton onClick={cartActions.countDown(optionHash)}>
               <MinusIcon />
             </CounterIconButton>
-            <Count>1</Count>
-            <CounterIconButton>
+            <Count>{count}</Count>
+            <CounterIconButton onClick={cartActions.countUp(optionHash)}>
               <PlusIcon />
             </CounterIconButton>
           </CounterWrapper>
