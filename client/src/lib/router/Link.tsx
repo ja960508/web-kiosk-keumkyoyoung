@@ -17,11 +17,7 @@ function Link(props: LinkProps) {
     }
   };
 
-  return (
-    <a {...anchorProps} onClick={onClick}>
-      {children}
-    </a>
-  );
+  return <a onClick={onClick}>{children}</a>;
 }
 
 export default Link;
