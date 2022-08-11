@@ -1,16 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import styled from 'styled-components';
 import { useMenuData } from '.';
+import useSlide from '../../hooks/useSlide';
 import { AnimatePresence } from '../../lib/animation/AnimatedPresence';
 import AnimatedComponent from '../../lib/animation/animationComponent';
 import MenuItem from './MenuItem';
 
 const MenuList: FC = () => {
   const { selectedMenuItems } = useMenuData();
+  const offsetRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const pointerProps = useSlide({ offsetRef, scrollRef, key: selectedMenuItems?.id || 'menuList' });
   return (
-    <Wrapper>
+    <Wrapper ref={offsetRef}>
       <AnimatePresence>
         <MenuListWrapper
+          {...pointerProps}
+          slideRef={scrollRef}
+          onPointerMove={pointerProps.onPointerMove}
           key={selectedMenuItems?.id}
           keyframeOption={{ duration: 400 }}
           onEnter={[
@@ -43,7 +50,8 @@ const MenuListWrapper = styled(AnimationUl)`
   justify-items: center;
   row-gap: var(--space-5);
   column-gap: var(--space-6);
-  min-height: 1000px;
+  touch-action: pan-x;
+  cursor: grab;
 `;
 
 const Wrapper = styled.div`

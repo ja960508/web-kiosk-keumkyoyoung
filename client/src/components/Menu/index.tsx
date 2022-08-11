@@ -69,4 +69,5 @@ export const useMenuAction = () => {
 const MenuWrapper = styled.div`
   ${mixin.flexMixin({ direction: 'column' })}
   overflow-x: hidden;
+  height: 100%;
 `;
