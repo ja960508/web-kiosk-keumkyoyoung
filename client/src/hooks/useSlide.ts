@@ -59,7 +59,7 @@ const useSlide = <T extends HTMLElement, K extends HTMLElement>({
       }
 
       const { maxY } = maxInfoRef.current;
-      console.log({ maxY });
+
       if (y > -maxY && y <= 0) {
         return true;
       }

@@ -19,7 +19,7 @@ function CartMenuItem({ cartItem }: CartMenuItemProps) {
         <Wrapper>
           <RelativeContainer>
             <img draggable="false" src={thumbnail} alt={name} />
-            <SVGWrapper>
+            <SVGWrapper onClick={cartActions.delete(optionHash)}>
               <XIcon />
             </SVGWrapper>
           </RelativeContainer>

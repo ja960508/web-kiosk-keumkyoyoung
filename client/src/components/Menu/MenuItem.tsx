@@ -13,7 +13,7 @@ interface MenuItemProps {
   menuItemData: IMenuItem;
 }
 
-const SENSITIVITY = 0.14;
+const SENSITIVITY = 0.16;
 
 function MenuItem({ menuItemData }: MenuItemProps) {
   const { status, thumbnail, name, price } = menuItemData;
