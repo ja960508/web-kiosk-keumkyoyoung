@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({ toggleModal, children }) => {
         keyframeOption={{ duration: 300, fill: 'forwards' }}
         onClick={toggleModal}
       ></ModalWrapper>
-      {children}
+      <ModalContainer>{children}</ModalContainer>
     </>,
     modalRoot
   );
@@ -41,4 +41,12 @@ const ModalWrapper = styled(animatedDiv)`
   position: relative;
   color: white;
   z-index: 300;
+`;
+
+const ModalContainer = styled.div`
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: transparent;
+  border-radius: calc(var(--screen-width) / (20));
+  position: absolute;
 `;

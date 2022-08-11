@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Modal from '..';
 import { CartItem, useCart } from '../../../contexts/cartContext';
@@ -40,59 +40,57 @@ function MenuModal({ toggleModal, menuItemData, sharedRef }: MenuModalProps) {
 
   return (
     <Modal toggleModal={toggleModal}>
-      <MenuModalContainer>
-        <LeftWrapper>
-          <MenuModalWrapper key={'modal'} sharedRef={sharedRef} keyframeOption={{ duration: 400 }}>
-            <TitleText>옵션 선택</TitleText>
-            <ProductWrapper>
-              <ProductInfo>
-                <img src={thumbnail} alt={name} />
-                <Name>{name}</Name>
-                <p>{(price * count).toLocaleString('kr')}원</p>
-                <CounterWrapper>
-                  <CounterIconButton onClick={actions.countDown}>
-                    <MinusIcon />
-                  </CounterIconButton>
-                  <Count>{count}</Count>
-                  <CounterIconButton onClick={actions.countUp}>
-                    <PlusIcon />
-                  </CounterIconButton>
-                </CounterWrapper>
-              </ProductInfo>
-              <OptionList>
-                {option.data.map((opt, optionIndex) => (
-                  <li key={opt.name}>
-                    <OptionTitle>{opt.name}</OptionTitle>
-                    <OptionValues>
-                      {opt.content.map((value, index) => (
-                        <OptionValue
-                          selected={value === selectedOptions[optionIndex]}
-                          key={index}
-                          onClick={actions.selectOption(optionIndex, value)}
-                        >
-                          {value}
-                        </OptionValue>
-                      ))}
-                    </OptionValues>
-                  </li>
-                ))}
-              </OptionList>
-            </ProductWrapper>
-            <BtnList>
-              <CancelBtn onClick={toggleModal}>이전</CancelBtn>
-              <ConfirmBtn
-                isActive={isAllValidate}
-                onClick={() => {
-                  addCart();
-                  toggleModal();
-                }}
-              >
-                담기
-              </ConfirmBtn>
-            </BtnList>
-          </MenuModalWrapper>
-        </LeftWrapper>
-      </MenuModalContainer>
+      <LeftWrapper>
+        <MenuModalWrapper key={'modal'} sharedRef={sharedRef} keyframeOption={{ duration: 400 }}>
+          <TitleText>옵션 선택</TitleText>
+          <ProductWrapper>
+            <ProductInfo>
+              <img src={thumbnail} alt={name} />
+              <Name>{name}</Name>
+              <p>{(price * count).toLocaleString('kr')}원</p>
+              <CounterWrapper>
+                <CounterIconButton onClick={actions.countDown}>
+                  <MinusIcon />
+                </CounterIconButton>
+                <Count>{count}</Count>
+                <CounterIconButton onClick={actions.countUp}>
+                  <PlusIcon />
+                </CounterIconButton>
+              </CounterWrapper>
+            </ProductInfo>
+            <OptionList>
+              {option.data.map((opt, optionIndex) => (
+                <li key={opt.name}>
+                  <OptionTitle>{opt.name}</OptionTitle>
+                  <OptionValues>
+                    {opt.content.map((value, index) => (
+                      <OptionValue
+                        selected={value === selectedOptions[optionIndex]}
+                        key={index}
+                        onClick={actions.selectOption(optionIndex, value)}
+                      >
+                        {value}
+                      </OptionValue>
+                    ))}
+                  </OptionValues>
+                </li>
+              ))}
+            </OptionList>
+          </ProductWrapper>
+          <BtnList>
+            <CancelBtn onClick={toggleModal}>이전</CancelBtn>
+            <ConfirmBtn
+              isActive={isAllValidate}
+              onClick={() => {
+                addCart();
+                toggleModal();
+              }}
+            >
+              담기
+            </ConfirmBtn>
+          </BtnList>
+        </MenuModalWrapper>
+      </LeftWrapper>
     </Modal>
   );
 }
@@ -113,16 +111,6 @@ const MenuModalWrapper = styled(animatedDiv)`
 
   flex-direction: column;
   padding: var(--space-6);
-`;
-
-const MenuModalContainer = styled.div`
-  width: var(--screen-width);
-  height: var(--screen-height);
-  background-color: transparent;
-  border-radius: calc(var(--screen-width) / (20));
-  position: relative;
-
-  position: absolute;
 `;
 
 const LeftWrapper = styled.div`
@@ -175,7 +163,7 @@ const OptionList = styled.ul`
   gap: var(--space-6);
 `;
 
-const TitleText = styled.p`
+export const TitleText = styled.p`
   font-size: var(--text-xl);
   text-align: center;
   font-weight: 600;

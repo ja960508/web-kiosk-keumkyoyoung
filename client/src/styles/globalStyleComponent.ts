@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import AnimatedComponent from '../lib/animation/animationComponent';
 
 export const FlexCenter = styled.div`
   margin: 0 auto;
@@ -33,6 +34,25 @@ export const Button = styled.button`
   color: var(--text-color);
 
   cursor: pointer;
+`;
+
+const animatedDiv = AnimatedComponent('div');
+export const ModalWrapper = styled(animatedDiv)`
+  position: absolute;
+  z-index: 3000;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: var(--rounded-xl);
+  width: 60%;
+  height: 600px;
+
+  display: flex;
+  box-shadow: var(--shadow-lg);
+  flex-direction: column;
+  padding: var(--space-6);
 `;
 
 export const RelativeContainer = styled.div`

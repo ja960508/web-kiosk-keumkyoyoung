@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useCart } from '../../contexts/cartContext';
 import { Button } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
+import Modal from '../Modal';
+import { useChainingModal } from '../Modal/useChainingModal';
 import CartMenuList from './CartMenuList';
 
 // interface CartProps {
@@ -11,21 +13,31 @@ import CartMenuList from './CartMenuList';
 
 const Cart: FC = ({}) => {
   const { cart, cartActions } = useCart();
-  const totalPrice = cart.reduce((total, { count, price }) => total + price * count, 0);
+  const { modalMap, modalActions, modalInfo } = useChainingModal();
+  const totalPrice = cartActions.getTotalPrice();
+  const { type, props } = modalInfo;
 
+  const ModalComponent = modalMap[modalInfo['type']];
   return (
-    <Wrapper>
-      <Title>장바구니</Title>
-      <Description>먹고 가요</Description>
-      <CartMenuList />
-      <SubTitle>{totalPrice.toLocaleString('kr')} 원</SubTitle>
-      <TotalPrice></TotalPrice>
-      <TimeText>3 초 남음</TimeText>
-      <BtnWrapper>
-        <CancelBtn onClick={cartActions.deleteAll}>전체취소</CancelBtn>
-        <BuyBtn>결제하기</BuyBtn>
-      </BtnWrapper>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Title>장바구니</Title>
+        <Description>먹고 가요</Description>
+        <CartMenuList />
+        <SubTitle>{totalPrice.toLocaleString('kr')} 원</SubTitle>
+        <TotalPrice></TotalPrice>
+        <TimeText>3 초 남음</TimeText>
+        <BtnWrapper>
+          <CancelBtn onClick={cartActions.deleteAll}>전체취소</CancelBtn>
+          <BuyBtn onClick={modalActions.openModal({ type: 'confirm', props: {} })}>결제하기</BuyBtn>
+        </BtnWrapper>
+      </Wrapper>
+      {type !== 'none' && (
+        <Modal toggleModal={modalActions.closeModal}>
+          <ModalComponent {...props} />
+        </Modal>
+      )}
+    </>
   );
 };
 
