@@ -7,11 +7,7 @@ import { MinusIcon, PlusIcon, XIcon } from '../common/icons';
 import { TitleText } from './MenuModal/MenuModal';
 import { useChainingModal } from './useChainingModal';
 
-export interface ConfirmModalProps {
-  name?: string;
-}
-
-const ConfirmModal: FC<ConfirmModalProps> = ({}) => {
+const ConfirmModal: FC = ({}) => {
   const { modalActions } = useChainingModal();
   const { cart, cartActions } = useCart();
   const totalPrice = cartActions.getTotalPrice();
@@ -46,7 +42,7 @@ const ConfirmModal: FC<ConfirmModalProps> = ({}) => {
   ));
   return (
     <ModalWrapper>
-      <TitleText>옵션 선택</TitleText>
+      <TitleText>주문 내역을 확인해주세요</TitleText>
       <List>{CartList}</List>
       <Box>
         <InfoBox>
@@ -60,7 +56,12 @@ const ConfirmModal: FC<ConfirmModalProps> = ({}) => {
       </Box>
       <BtnList>
         <CancelBtn onClick={modalActions.closeModal}>이전</CancelBtn>
-        <ConfirmBtn isActive={true}>결제하기</ConfirmBtn>
+        <ConfirmBtn
+          isActive={true}
+          onClick={modalActions.openModal({ type: 'payment', props: {} })}
+        >
+          결제하기
+        </ConfirmBtn>
       </BtnList>
     </ModalWrapper>
   );
