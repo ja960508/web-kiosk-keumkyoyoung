@@ -1,32 +1,52 @@
 import React, { FC, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { sendOrder } from '../../api';
 import { useCart } from '../../contexts/cartContext';
 import { Button, ModalWrapper } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
+import { Order, Payment } from '../../types/server/order';
 import { TitleText } from './MenuModal/MenuModal';
 import { useChainingModal } from './useChainingModal';
 
 const CashModal: FC = ({}) => {
   const { modalActions } = useChainingModal();
-  const { cartActions } = useCart();
-  const [enabled, setEnabled] = useState(true);
+  const { cart, cartActions } = useCart();
+  const [inputEnabled, setInputEnabled] = useState(true);
   const [totalInput, setTotalInput] = useState(0);
 
   const totalPrice = useMemo(() => {
     return cartActions.getTotalPrice();
   }, []);
 
+  const order = async () => {
+    if (inputEnabled) {
+      return;
+    }
+    const orderItems: Order['orderItems'] = cart.map(({ menuId, count }) => {
+      return { menuItemId: menuId, count };
+    });
+    const newOrder: Order = {
+      paidAmount: totalInput,
+      totalAmount: totalPrice,
+      orderItems,
+      paymentMethod: Payment.CASH,
+    };
+
+    const receipt = await sendOrder(newOrder);
+    modalActions.openModal({ type: 'order', props: { receipt } })();
+  };
+
   const CashInputs = [500, 1000, 5000, 10000].map((money) => (
     <PaymentLi
       key={money}
       onClick={() => {
-        if (!enabled) {
+        if (!inputEnabled) {
           return;
         }
 
         const newTotalInput = totalInput + money;
-        if (newTotalInput > totalPrice) {
-          setEnabled(false);
+        if (newTotalInput >= totalPrice) {
+          setInputEnabled(false);
         }
 
         setTotalInput(totalInput + money);
@@ -59,10 +79,7 @@ const CashModal: FC = ({}) => {
 
       <BtnList>
         <CancelBtn onClick={modalActions.closeModal}>취소</CancelBtn>
-        <ConfirmBtn
-          isActive={!enabled}
-          onClick={modalActions.openModal({ type: 'payment', props: {} })}
-        >
+        <ConfirmBtn isActive={!inputEnabled} onClick={order}>
           결제하기
         </ConfirmBtn>
       </BtnList>
