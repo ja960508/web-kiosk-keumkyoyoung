@@ -4,6 +4,7 @@ import { AnimatePresence } from '../../lib/animation/AnimatedPresence';
 import { RelativeContainer } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
 import { MenuItem as IMenuItem } from '../../types/server/menu';
+import { getTime } from '../../util/time';
 import MenuModal from '../Modal/MenuModal/MenuModal';
 import useModal from '../Modal/useModal';
 import StatusDescription from './StatusDescription';
@@ -12,15 +13,31 @@ interface MenuItemProps {
   menuItemData: IMenuItem;
 }
 
+const SENSITIVITY = 0.14;
+
 function MenuItem({ menuItemData }: MenuItemProps) {
   const { status, thumbnail, name, price } = menuItemData;
   const ref = useRef<HTMLDivElement>(null);
+  const timeRef = useRef<number>(0);
 
   const { isModalOpen, toggleModal } = useModal();
   return (
     <>
       <Wrapper>
-        <MenuItemContainer ref={ref} onClick={toggleModal}>
+        <MenuItemContainer
+          ref={ref}
+          onClick={() => {
+            const clickTime = getTime();
+            const interval = clickTime - timeRef.current;
+            const isClick = interval < SENSITIVITY;
+            if (isClick) {
+              toggleModal();
+            }
+          }}
+          onPointerDown={() => {
+            timeRef.current = getTime();
+          }}
+        >
           <RelativeContainer>
             <img draggable="false" src={thumbnail} alt={name} />
             <StatusDescription status={status} />

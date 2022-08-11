@@ -42,11 +42,7 @@ function MenuModal({ toggleModal, menuItemData, sharedRef }: MenuModalProps) {
     <Modal toggleModal={toggleModal}>
       <MenuModalContainer>
         <LeftWrapper>
-          <MenuModalWrapper
-            key={'modal'}
-            animatedRef={sharedRef}
-            keyframeOption={{ duration: 400 }}
-          >
+          <MenuModalWrapper key={'modal'} sharedRef={sharedRef} keyframeOption={{ duration: 400 }}>
             <TitleText>옵션 선택</TitleText>
             <ProductWrapper>
               <ProductInfo>
