@@ -2,13 +2,15 @@ import React, { createContext, useContext, useMemo, useState } from 'react';
 import CashModal from './CashModal';
 import OrderModal from './OrderModal';
 import PaymentModal from './PaymentModal';
-import ConfirmModal, { ConfirmModalProps } from './ConfirmModal';
+import ConfirmModal from './ConfirmModal';
+import CreditModal from './CreditModal';
 
 interface ModalMap {
-  cash: React.FC<ConfirmModalProps>;
-  confirm: React.FC<ConfirmModalProps>;
-  payment: React.FC<ConfirmModalProps>;
-  order: React.FC<ConfirmModalProps>;
+  cash: React.FC;
+  confirm: React.FC;
+  payment: React.FC;
+  order: React.FC;
+  credit: React.FC;
   none: React.ExoticComponent<{
     children?: React.ReactNode;
   }>;
@@ -39,12 +41,13 @@ const ModalContext = createContext<ModalContext>(null!);
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [modalInfo, setModalInfo] = useState<ModalInfo>({ type: 'none', props: {} });
-  const modalMap = useMemo(() => {
+  const modalMap: ModalMap = useMemo(() => {
     return {
       cash: CashModal,
       confirm: ConfirmModal,
       payment: PaymentModal,
       order: OrderModal,
+      credit: CreditModal,
       none: React.Fragment,
     };
   }, []);

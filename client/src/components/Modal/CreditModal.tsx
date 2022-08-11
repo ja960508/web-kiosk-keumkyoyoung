@@ -3,38 +3,28 @@ import styled from 'styled-components';
 import { useCart } from '../../contexts/cartContext';
 import { Button, ModalWrapper } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
-import { CashIcon, CreditCard, MinusIcon, PlusIcon, XIcon } from '../common/icons';
 import { TitleText } from './MenuModal/MenuModal';
 import { useChainingModal } from './useChainingModal';
+import CreditMotion from '../../assets/giphy.png';
 
-const PaymentModal: FC = ({}) => {
+const CreditModal: FC = ({}) => {
   const { modalActions } = useChainingModal();
   const { cartActions } = useCart();
-  const totalPrice = cartActions.getTotalPrice();
+
+  useEffect(() => {
+    setTimeout(() => {
+      modalActions.openModal({ type: 'order', props: {} })();
+    }, 3000);
+  }, []);
 
   return (
     <ModalWrapper>
-      <TitleText>결제 방법을 선택해주세요</TitleText>
+      <TitleText>카드를 넣어주세요</TitleText>
       <List>
-        <PaymentLi onClick={modalActions.openModal({ type: 'cash', props: {} })}>
-          <SVGWrapper>
-            <CashIcon />
-          </SVGWrapper>
-          <Text>현금</Text>
-        </PaymentLi>
-        <PaymentLi onClick={modalActions.openModal({ type: 'credit', props: {} })}>
-          <SVGWrapper>
-            <CreditCard />
-          </SVGWrapper>
-          <Text>신용카드</Text>
-        </PaymentLi>
+        <img src={CreditMotion} alt="" />
       </List>
       <Box>
         <InfoBox></InfoBox>
-        <InfoBox>
-          <span>결제 금액: </span>
-          <DangerText>{totalPrice.toLocaleString('kr')}원</DangerText>
-        </InfoBox>
       </Box>
       <BtnList>
         <CancelBtn onClick={modalActions.closeModal}>취소</CancelBtn>
@@ -43,20 +33,14 @@ const PaymentModal: FC = ({}) => {
   );
 };
 
-export default PaymentModal;
+export default CreditModal;
 const InfoBox = styled.div`
   font-size: var(--text-xl);
   font-weight: 600;
 `;
-const Text = styled.p`
-  margin-top: var(--space-1);
-`;
-const DangerText = styled.span`
-  color: #ea4a35;
-`;
 
 const List = styled.ul`
-  ${mixin.flexMixin({})};
+  ${mixin.flexMixin({ justify: 'center', align: 'center' })};
   gap: var(--space-4);
   width: 500px;
   font-size: var(--text-lg);

@@ -33,7 +33,7 @@ const Cart: FC = ({}) => {
         </BtnWrapper>
       </Wrapper>
       {type !== 'none' && (
-        <Modal toggleModal={modalActions.closeModal}>
+        <Modal>
           <ModalComponent {...props} />
         </Modal>
       )}
