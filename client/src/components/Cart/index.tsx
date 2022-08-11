@@ -18,7 +18,7 @@ const Cart: FC = ({}) => {
       <Title>장바구니</Title>
       <Description>먹고 가요</Description>
       <CartMenuList />
-      <SubTitle>{totalPrice.toLocaleString('kr')}</SubTitle>
+      <SubTitle>{totalPrice.toLocaleString('kr')} 원</SubTitle>
       <TotalPrice></TotalPrice>
       <TimeText>3 초 남음</TimeText>
       <BtnWrapper>
@@ -84,6 +84,7 @@ const SubTitle = styled.p`
   font-size: var(--text-sm);
   font-family: var(--display-font);
   color: var(--grey500);
+  text-align: right;
 `;
 
 const TotalPrice = styled.p`
