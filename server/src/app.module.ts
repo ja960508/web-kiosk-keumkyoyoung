@@ -6,6 +6,9 @@ import validationSchema from './config/validationSchema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MenuModule } from './menu/menu.module';
 import { OrderModule } from './order/order.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -27,6 +30,10 @@ import { OrderModule } from './order/order.module';
         synchronize: true,
         timezone: 'Asia/Seoul',
       }),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), '..', 'client', 'build'),
+      exclude: ['/api*', '/docs*'],
     }),
     MenuModule,
     OrderModule,
