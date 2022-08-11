@@ -13,3 +13,12 @@ export type Order = {
   }[];
   orderNumber?: number;
 };
+
+export type Receipt = {
+  paidAmount: string;
+  totalAmount: string;
+  paymentMethod: Payment;
+  orderNumber: number;
+  id: number;
+  paymentDate: string;
+};
