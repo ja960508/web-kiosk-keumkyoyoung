@@ -31,7 +31,13 @@ function AnimatedComponent<T extends HTMLElement>(Tag: keyof React.ReactHTML) {
     const { isVisible, onExitAnimationDone } = usePresence();
 
     const elementRef = ref || useRef<HTMLElement>(null);
-    const defaultKeyFrameOption: KeyframeAnimationOptions = {
+    const defaultEnterKeyFrameOption: KeyframeAnimationOptions = {
+      duration: 500,
+      fill: 'none',
+      easing: 'ease-in-out',
+    };
+
+    const defaultExitKeyFrameOption: KeyframeAnimationOptions = {
       duration: 500,
       fill: 'forwards',
       easing: 'ease-in-out',
@@ -42,14 +48,14 @@ function AnimatedComponent<T extends HTMLElement>(Tag: keyof React.ReactHTML) {
       const sharedKeyframe = getSharedAnimationKeyFrame(sharedRef, elementRef);
       if (isVisible) {
         const animation = elementRef.current.animate(sharedKeyframe || onEnter, {
-          ...defaultKeyFrameOption,
+          ...defaultEnterKeyFrameOption,
           ...keyframeOption,
         });
 
         return () => animation.cancel();
       } else {
         const animation = elementRef.current.animate(sharedKeyframe || onExit, {
-          ...defaultKeyFrameOption,
+          ...defaultExitKeyFrameOption,
           direction: sharedKeyframe ? 'reverse' : 'normal',
           ...keyframeOption,
         });

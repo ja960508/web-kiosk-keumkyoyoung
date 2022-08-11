@@ -19,7 +19,7 @@ const Modal: FC<ModalProps> = ({ toggleModal, children }) => {
     <>
       <ModalWrapper
         onEnter={[{}, { backgroundColor: 'rgba(0,0,0,0.3)' }]}
-        keyframeOption={{ duration: 300 }}
+        keyframeOption={{ duration: 300, fill: 'forwards' }}
         onClick={toggleModal}
       ></ModalWrapper>
       {children}
