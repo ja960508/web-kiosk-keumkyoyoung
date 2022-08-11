@@ -12,7 +12,8 @@ interface AnimatedComponentProps<T extends HTMLElement>
   onEnter?: AnimatedKeyFrame[];
   children?: React.ReactNode;
   isVisible?: boolean;
-  animatedRef?: React.RefObject<T>;
+  sharedRef?: React.RefObject<T>;
+  ref?: React.RefObject<T>;
   keyframeOption?: KeyframeAnimationOptions | undefined;
   onExitAnimationDone?: () => void;
 }
@@ -23,12 +24,13 @@ function AnimatedComponent<T extends HTMLElement>(Tag: keyof React.ReactHTML) {
     onEnter = [{}],
     keyframeOption,
     children,
-    animatedRef,
+    sharedRef,
+    ref,
     ...otherProps
   }: AnimatedComponentProps<T>) {
     const { isVisible, onExitAnimationDone } = usePresence();
 
-    const elementRef = useRef<HTMLElement>(null);
+    const elementRef = ref || useRef<HTMLElement>(null);
     const defaultKeyFrameOption: KeyframeAnimationOptions = {
       duration: 500,
       fill: 'forwards',
@@ -37,7 +39,7 @@ function AnimatedComponent<T extends HTMLElement>(Tag: keyof React.ReactHTML) {
 
     useEffect(() => {
       if (!elementRef.current) return;
-      const sharedKeyframe = getSharedAnimationKeyFrame(animatedRef, elementRef);
+      const sharedKeyframe = getSharedAnimationKeyFrame(sharedRef, elementRef);
       if (isVisible) {
         const animation = elementRef.current.animate(sharedKeyframe || onEnter, {
           ...defaultKeyFrameOption,
