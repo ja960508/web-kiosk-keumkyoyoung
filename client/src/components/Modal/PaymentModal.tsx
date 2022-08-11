@@ -7,11 +7,7 @@ import { CashIcon, CreditCard, MinusIcon, PlusIcon, XIcon } from '../common/icon
 import { TitleText } from './MenuModal/MenuModal';
 import { useChainingModal } from './useChainingModal';
 
-export interface ConfirmModalProps {
-  name?: string;
-}
-
-const PaymentModal: FC<ConfirmModalProps> = ({}) => {
+const PaymentModal: FC = ({}) => {
   const { modalActions } = useChainingModal();
   const { cartActions } = useCart();
   const totalPrice = cartActions.getTotalPrice();
