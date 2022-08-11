@@ -6,15 +6,38 @@ import mixin from '../../styles/mixin';
 import { TitleText } from './MenuModal/MenuModal';
 import { useChainingModal } from './useChainingModal';
 import CreditMotion from '../../assets/giphy.png';
+import { Order, Payment } from '../../types/server/order';
+import { sendOrder } from '../../api';
 
 const CreditModal: FC = ({}) => {
   const { modalActions } = useChainingModal();
-  const { cartActions } = useCart();
+  const { cartActions, cart } = useCart();
+  const totalPrice = cartActions.getTotalPrice();
+  const order = async () => {
+    const orderItems: Order['orderItems'] = cart.map(({ menuId, count }) => {
+      return { menuItemId: menuId, count };
+    });
+    const newOrder: Order = {
+      paidAmount: totalPrice,
+      totalAmount: totalPrice,
+      orderItems,
+      paymentMethod: Payment.CREDIT,
+    };
+
+    return await sendOrder(newOrder);
+  };
 
   useEffect(() => {
-    setTimeout(() => {
-      modalActions.openModal({ type: 'order', props: {} })();
+    const orderPromise = order();
+    const time = setTimeout(() => {
+      orderPromise.then((receipt) => {
+        modalActions.openModal({ type: 'order', props: { receipt } })();
+      });
     }, 3000);
+
+    return () => {
+      clearTimeout(time);
+    };
   }, []);
 
   return (

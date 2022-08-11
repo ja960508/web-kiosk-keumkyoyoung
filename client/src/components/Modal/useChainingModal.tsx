@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import CashModal from './CashModal';
-import OrderModal from './OrderModal';
+import OrderModal, { OrderModalProps } from './OrderModal';
 import PaymentModal from './PaymentModal';
 import ConfirmModal from './ConfirmModal';
 import CreditModal from './CreditModal';
@@ -9,7 +9,7 @@ interface ModalMap {
   cash: React.FC;
   confirm: React.FC;
   payment: React.FC;
-  order: React.FC;
+  order: React.FC<OrderModalProps>;
   credit: React.FC;
   none: React.ExoticComponent<{
     children?: React.ReactNode;
