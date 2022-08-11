@@ -13,6 +13,7 @@ export interface CartItem {
 interface Actions {
   add: (newCartItem: CartItem) => void;
   delete: (optionHash: CartItem['optionHash']) => () => void;
+  deleteAll: () => void;
   countUp: (optionHash: CartItem['optionHash']) => () => void;
   countDown: (optionHash: CartItem['optionHash']) => () => void;
 }
@@ -33,6 +34,9 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const cartActions: Actions = useMemo(() => {
     return {
+      deleteAll: () => {
+        setCart([]);
+      },
       add: (newCartItem: CartItem) => {
         const { optionHash, count } = newCartItem;
         const existedCartIndex = cart.findIndex((cartItem) => cartItem.optionHash === optionHash);

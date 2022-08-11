@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useCart } from '../../contexts/cartContext';
 import { Button } from '../../styles/globalStyleComponent';
 import mixin from '../../styles/mixin';
 import CartMenuList from './CartMenuList';
@@ -9,16 +10,19 @@ import CartMenuList from './CartMenuList';
 // }
 
 const Cart: FC = ({}) => {
+  const { cart, cartActions } = useCart();
+  const totalPrice = cart.reduce((total, { count, price }) => total + price * count, 0);
+
   return (
     <Wrapper>
       <Title>장바구니</Title>
       <Description>먹고 가요</Description>
       <CartMenuList />
-      <SubTitle>전체 가격</SubTitle>
-      <TotalPrice>20,000 원</TotalPrice>
+      <SubTitle>{totalPrice.toLocaleString('kr')}</SubTitle>
+      <TotalPrice></TotalPrice>
       <TimeText>3 초 남음</TimeText>
       <BtnWrapper>
-        <CancelBtn>전체취소</CancelBtn>
+        <CancelBtn onClick={cartActions.deleteAll}>전체취소</CancelBtn>
         <BuyBtn>결제하기</BuyBtn>
       </BtnWrapper>
     </Wrapper>
